@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.white, Colors.tealAccent, Colors.teal],
+            colors: [Colors.white, Colors.tealAccent, Colors.blue],
           ),
         ),
         // color: Colors.white,
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
         ),
-        side: BorderSide(width: 2, color: Colors.grey),
+        side: BorderSide(width: 2, color: Colors.blueGrey),
       ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Sign in with Google',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.grey,
+                  color: Colors.blueGrey,
                 ),
               ),
             )

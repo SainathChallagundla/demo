@@ -1,8 +1,8 @@
 import 'package:demo/helpers/common.dart';
 import 'package:flutter/material.dart';
-import 'package:device_info/device_info.dart';
 import 'package:demo/sign_in.dart';
 import 'package:demo/login.dart';
+import 'package:demo/deviceInfo.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key, this.email, this.name, this.imageURL})
@@ -14,61 +14,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  late AndroidDeviceInfo? androidInfo;
-  void getdeviceinfo() async {
-    androidInfo = await deviceInfo.androidInfo;
-    setState(() {
-      model = androidInfo!.model;
-    });
-  }
-
-  // DeviceInfoPlugin? deviceInfo =
-  //     DeviceInfoPlugin(); // instantiate device info plugin
-  // AndroidDeviceInfo? androidDeviceInfo;
-  String? board,
-      brand,
-      device,
-      hardware,
-      host,
-      id,
-      manufacture,
-      model,
-      product,
-      type,
-      androidid;
-  bool? isphysicaldevice;
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getDeviceinfo();
-  // }
-
-  // void getDeviceinfo() async {
-  //   androidDeviceInfo = await deviceInfo!
-  //       .androidInfo; // instantiate Android Device Infoformation
-  //   setState(() {
-  //     board = androidDeviceInfo?.board ?? "";
-  //     brand = androidDeviceInfo?.brand;
-  //     device = androidDeviceInfo?.device;
-  //     hardware = androidDeviceInfo!.hardware;
-  //     host = androidDeviceInfo!.host;
-  //     id = androidDeviceInfo!.id;
-  //     manufacture = androidDeviceInfo!.manufacturer;
-  //     model = androidDeviceInfo?.model??"";
-  //     product = androidDeviceInfo!.product;
-  //     type = androidDeviceInfo!.type;
-  //     isphysicaldevice = androidDeviceInfo!.isPhysicalDevice;
-  //     androidid = androidDeviceInfo!.androidId;
-  //   });
-  // }
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getdeviceinfo();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,17 +50,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     padding: EdgeInsets.all(10),
                     child:
                         readOnlyBorderedTextFormField(widget.email!, "Email")),
-                Padding(
-                    padding: EdgeInsets.all(10),
-                    child:
-                        readOnlyBorderedTextFormField(model!, "Device Name")),
-                logOut()
+                deviceInfo(),
+                logOut() //loout button implementation
               ],
             ),
           ),
         ));
   }
 
+//Logut method
   Widget logOut() {
     return OutlinedButton(
         onPressed: () {
@@ -145,6 +88,46 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   'Sign Out',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
+  }
+
+//Device info oage navigation method
+  Widget deviceInfo() {
+    return OutlinedButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => DeviceInfo()));
+        },
+        style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          side: BorderSide(width: 2, color: Colors.grey),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.perm_device_info,
+                color: Colors.black,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  'Device Info',
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.grey,
